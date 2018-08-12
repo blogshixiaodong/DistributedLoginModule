@@ -1,0 +1,34 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.cloud.client.ipAddress}:8000/eureka
+
+server:
+  port: 8003
+
+spring:
+  application:
+    name: login-module
+  mvc:
+    view:
+      suffix: .jsp
+#      prefix: /WEB-INF/
+  datasource:
+      url: jdbc:mysql://localhost:3306/login_module
+      username: root
+      password: shixiaodong
+      driver-class-name: com.mysql.jdbc.Driver
+#  resources:
+#    static-locations: classpath:/web/
+
+
+mybatis:
+  type-aliases-package: cn.com.bosssoft.loginmodule.domain
+  mapper-locations: mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+
+
+
+
+
+

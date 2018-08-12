@@ -19,7 +19,7 @@ public class LoginController {
     private AccountServer accountServer;
 
     @RequestMapping("/login")
-    public Integer login( Account account) {
+    public Integer login(@RequestBody Account account) {
         boolean loginResult = accountServer.loginCheck(account);
         if(loginResult) {
             return 0;

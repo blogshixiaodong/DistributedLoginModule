@@ -11,6 +11,9 @@
     <modules>
         <module>registry-centre</module>
         <module>login-server</module>
+        <module>zuulserver</module>
+        <module>loginmodule</module>
+        <module>login-module</module>
     </modules>
 
 
