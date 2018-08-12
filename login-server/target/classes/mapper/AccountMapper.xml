@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 类的全限定名 -->
+<mapper namespace="cn.com.bosssoft.loginserver.mapper.AccountMapper">
+
+    <insert id="insertAccount" keyProperty="accountId" useGeneratedKeys="true" parameterType="cn.com.bosssoft.loginserver.domain.Account">
+      INSERT INTO account(password,userid) values(#{password},#{userId})
+    </insert>
+    <!-- 自定义返回结果集 -->
+    <resultMap id="accountMap" type="cn.com.bosssoft.loginserver.domain.Account">
+        <id property="accountId" column="accountId" javaType="java.lang.Integer" />
+        <result property="password" column="password" javaType="java.lang.String" />
+        <result property="userId" column="userId" javaType="java.lang.Integer" />
+    </resultMap>
+
+    <select id="selectAccountById" parameterType="java.lang.Integer" resultMap="accountMap">
+        SELECT * FROM account WHERE accountId = #{accountId};
+    </select>
+
+</mapper>

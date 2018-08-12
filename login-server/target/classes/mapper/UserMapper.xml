@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 类的全限定名 -->
+<mapper namespace="cn.com.bosssoft.loginserver.mapper.UserMapper">
+    <insert id="insertUser" keyProperty="userId" useGeneratedKeys="true" parameterType="cn.com.bosssoft.loginserver.domain.User">
+        INSERT INTO user(username,gender,address) values (#{username},#{gender},#{address})
+    </insert>
+    <!-- 自定义返回结果集 -->
+    <resultMap id="user" type="cn.com.bosssoft.loginserver.domain.User">
+        <id property="id" column="id" javaType="java.lang.Integer" />
+        <result property="username" column="username" javaType="java.lang.String" />
+        <result property="password" column="password" javaType="java.lang.String" />
+    </resultMap>
+
+    <select id="selectUserList" resultMap="user">
+        SELECT * FROM user LIMIT #{currentIndex}, #{pageSize};
+    </select>
+
+    <select id="selectUserByUsername" resultMap="user">
+        SELECT * FROM user WHERE username = #{username};
+    </select>
+
+    <select id="selectUserCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user;
+    </select>
+
+</mapper>
