@@ -20,6 +20,7 @@ public class RegisterController {
 
     @RequestMapping(value = "/register" )
     public String register(User user, Account account){
+        user.setAccount(account);
         accountServer.insertAccount(account, user);
         return "redirect:../index.jsp";
 

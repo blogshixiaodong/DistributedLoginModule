@@ -31,22 +31,11 @@ public class AccountServerImpl implements AccountServer {
 
     @Override
     public void insertAccount(Account account, User user) {
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("accountId", account.getAccountId());
-//        map.put("password", account.getPassword());
-//        map.put("username", user.getUsername());
-//        map.put("gender", user.getGender());
-//        map.put("address", user.getAddress());
-
-        JSONObject json = new JSONObject();
-        json.put("accountId", account.getAccountId());
-        json.put("password", account.getPassword());
-        json.put("username", user.getUsername());
-        json.put("gender", user.getGender());
-        json.put("address", user.getAddress());
         logger.info("调用用户注册服务......");
-        String result = restTemplate.postForObject("http://ZUUL-SERVICE/loginservice/user/register", json.toString(), String.class);
+        String result = restTemplate.postForObject("http://ZUUL-SERVICE/loginservice/user/register", user, String.class);
         logger.info("用户注册服务结束，返回值为: {}", result);
     }
+
+
 
 }

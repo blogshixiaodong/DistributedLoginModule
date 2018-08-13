@@ -29,6 +29,16 @@ public class UserServerImpl implements UserServer {
         }
         return user;
     }
+
+    @Override
+    public List<User> userList() {
+        try {
+            return userMapper.selectUserList(0, 10);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 
 

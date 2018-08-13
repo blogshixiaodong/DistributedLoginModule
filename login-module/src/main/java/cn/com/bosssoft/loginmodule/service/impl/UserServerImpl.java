@@ -4,8 +4,11 @@ import cn.com.bosssoft.loginmodule.domain.PageContainer;
 import cn.com.bosssoft.loginmodule.domain.User;
 import cn.com.bosssoft.loginmodule.mapper.UserMapper;
 import cn.com.bosssoft.loginmodule.service.UserServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,8 +20,13 @@ import java.util.List;
 @Service
 public class UserServerImpl implements UserServer {
 
+    private static Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Override
     public User getUserById(Integer userId) {
@@ -50,6 +58,16 @@ public class UserServerImpl implements UserServer {
         }
         return pageContainer;
     }
+
+    @Override
+    public List<User> userList() {
+        logger.info("调用用户注册服务......");
+        List<User> userList = restTemplate.getForObject("http://ZUUL-SERVICE/loginservice/list", List.class);
+        logger.info("用户注册服务结束，返回值为: {}", userList.toString());
+        return userList;
+    }
+
+
 }
 
 

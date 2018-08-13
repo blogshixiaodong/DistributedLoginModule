@@ -1,20 +1,15 @@
 package cn.com.bosssoft.loginserver.controller;
 
-import cn.com.bosssoft.loginserver.domain.Account;
 import cn.com.bosssoft.loginserver.domain.User;
 import cn.com.bosssoft.loginserver.service.AccountServer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: Shixiaodong
  * @date :  2018/8/3.
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class RegisterController {
 
@@ -22,8 +17,8 @@ public class RegisterController {
     private AccountServer accountServer;
 
     @RequestMapping("/register" )
-    public String register(@RequestParam User user, @RequestParam Account account) {
-        accountServer.insertAccount(account, user);
+    public String register(@RequestBody User user) {
+        accountServer.insertAccount(user.getAccount(), user);
         return "0";
     }
 }
